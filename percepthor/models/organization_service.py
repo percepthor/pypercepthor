@@ -42,6 +42,10 @@ class OrganizationService (Schema):
 				"ref": "organizations",
 				"required": True
 			},
+			"status": {
+				"type": Types.Number,
+				"default": ORGANIZATION_SERVICE_STATUS_NONE
+			},
 			"actions_mask": {
 				"type": Types.Number,
 				"default": 0
@@ -49,10 +53,6 @@ class OrganizationService (Schema):
 			"date": {
 				"type": Types.Date,
 				"default": datetime.datetime.utcnow ()
-			},
-			"oservice_status": {
-				"type": Types.Number,
-				"default": ORGANIZATION_SERVICE_STATUS_NONE
 			},
 			"used": {
 				"type": Types.Boolean,
