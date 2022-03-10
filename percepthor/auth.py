@@ -1,0 +1,6 @@
+from .lib import lib
+
+# version
+percepthor_libauth_version_print_full = lib.percepthor_libauth_version_print_full
+percepthor_libauth_version_print_version_id = lib.percepthor_libauth_version_print_version_id
+percepthor_libauth_version_print_version_name = lib.percepthor_libauth_version_print_version_name
