@@ -15,7 +15,7 @@ TICKET_STATUS_PASSED = 6
 TICKET_STATUS_ERROR = 7
 
 class Ticket (Schema):
-	schame_name = "tickets"
+	schema_name = "tickets"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

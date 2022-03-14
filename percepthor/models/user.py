@@ -2,7 +2,7 @@ import datetime
 from pymongoose.mongo_types import Types, Schema
 
 class User (Schema):
-	schame_name = "users"
+	schema_name = "users"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

@@ -2,7 +2,7 @@ import datetime
 from pymongoose.mongo_types import Types, Schema
 
 class TokenData (Schema):
-	schame_name = "tokens.data"
+	schema_name = "tokens.data"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

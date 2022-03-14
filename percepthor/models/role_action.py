@@ -2,7 +2,7 @@ import datetime
 from pymongoose.mongo_types import Types, Schema
 
 class RoleAction (Schema):
-	schame_name = "roles.actions"
+	schema_name = "roles.actions"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

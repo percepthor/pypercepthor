@@ -50,7 +50,7 @@ def token_type_to_string (status: int):
 	return result
 
 class Token (Schema):
-	schame_name = "tokens"
+	schema_name = "tokens"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
