@@ -91,9 +91,9 @@ class Token (Schema):
 			},
 
 			# api key
-			"token_name": {
+			"name": {
 				"type": Types.String,
-				"required": True
+				"default": None
 			},
 			"description": {
 				"type": Types.String,
