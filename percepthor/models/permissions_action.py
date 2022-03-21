@@ -1,3 +1,4 @@
+import datetime
 from pymongoose.mongo_types import Types, Schema
 
 class PermissionsAction (Schema):
@@ -12,6 +13,10 @@ class PermissionsAction (Schema):
 			"description": {
 				"type": Types.String,
 				"required": True
+			},
+			"date": {
+				"type": Types.Date,
+				"default": datetime.datetime.utcnow ()
 			}
 		}
 
