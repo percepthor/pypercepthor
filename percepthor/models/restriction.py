@@ -76,7 +76,7 @@ def restriction_type_to_string (restriction_type: int):
 	return result
 
 class Restriction (Schema):
-	schema_name = "restrictions"
+	schema_name = "modules.restrictions"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

@@ -2,7 +2,7 @@ import datetime
 from pymongoose.mongo_types import Types, Schema
 
 class Screen (Schema):
-	schema_name = "screens"
+	schema_name = "modules.screens"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

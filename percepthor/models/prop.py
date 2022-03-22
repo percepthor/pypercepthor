@@ -24,7 +24,7 @@ def prop_type_to_string (prop_type: int):
 	return result
 
 class Prop (Schema):
-	schema_name = "props"
+	schema_name = "modules.props"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

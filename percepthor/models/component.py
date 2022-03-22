@@ -96,7 +96,7 @@ def field_type_to_string (field_type: int):
 	return result
 
 class Component (Schema):
-	schema_name = "components"
+	schema_name = "modules.components"
 
 	def __init__ (self, **kwargs):
 		self.schema = {

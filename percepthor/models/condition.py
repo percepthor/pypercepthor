@@ -24,7 +24,7 @@ def condition_type_to_string (condition_type: int):
 	return result
 
 class Condition (Schema):
-	schema_name = "conditions"
+	schema_name = "modules.conditions"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
