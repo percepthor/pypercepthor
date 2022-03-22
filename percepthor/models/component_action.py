@@ -53,11 +53,34 @@ def scope_to_string (scope: int):
 
 	return result
 
-# TODO: request method types
-REQUEST_METHOD_NONE = 0
+COMPONENT_ACTION_METHOD_NONE = 0
+COMPONENT_ACTION_METHOD_GET = 1
+COMPONENT_ACTION_METHOD_POST = 2
+COMPONENT_ACTION_METHOD_PUT = 3
+COMPONENT_ACTION_METHOD_DELETE = 4
+
+def component_action_method_to_string (action_method: int):
+	result = "Undefined"
+
+	if (action_method == COMPONENT_ACTION_METHOD_NONE):
+		pass
+
+	elif (action_method == COMPONENT_ACTION_METHOD_GET):
+		result = "Get"
+
+	elif (action_method == COMPONENT_ACTION_METHOD_POST):
+		result = "Post"
+
+	elif (action_method == COMPONENT_ACTION_METHOD_PUT):
+		result = "Put"
+
+	elif (action_method == COMPONENT_ACTION_METHOD_DELETE):
+		result = "Delete"
+
+	return result
 
 class ComponentAction (Schema):
-	schema_name = "components.actions"
+	schema_name = "modules.components.actions"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
@@ -85,7 +108,7 @@ class ComponentAction (Schema):
 			},
 			"method": {
 				"type": Types.Number,
-				"default": REQUEST_METHOD_NONE
+				"default": COMPONENT_ACTION_METHOD_NONE
 			},
 			"args": {
 				"type": Types.Number,
