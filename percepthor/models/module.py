@@ -1,11 +1,21 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
-class Project (Schema):
-	schema_name = "projects"
+class Module (Schema):
+	schema_name = "modules"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
+			"organization": {
+				"type": Types.ObjectId,
+				"ref": "organizations",
+				"required": True
+			},
+
+			"code": {
+				"type": Types.String,
+				"required": True
+			},
 			"name": {
 				"type": Types.String,
 				"required": True
@@ -14,11 +24,13 @@ class Project (Schema):
 				"type": Types.String,
 				"required": True
 			},
-			"organization": {
+
+			"configuration": {
 				"type": Types.ObjectId,
-				"ref": "organizations",
+				"ref": "modules.configuration",
 				"required": True
 			},
+
 			"date": {
 				"type": Types.Date,
 				"default": datetime.datetime.utcnow ()
@@ -28,4 +40,4 @@ class Project (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Project: {self.id}"
+		return f"Module: {self.id} - {self.user}"

@@ -24,7 +24,7 @@ def service_action_data_type_to_string (status: int):
 	return result
 
 class ServiceActionData (Schema):
-	schame_name = "services.actions.data"
+	schema_name = "services.actions.data"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
