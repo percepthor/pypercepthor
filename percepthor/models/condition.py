@@ -44,7 +44,7 @@ class Condition (Schema):
 
 			"restrictions": [{
 				"type": Types.ObjectId,
-				"ref": "restrictions",
+				"ref": "modules.restrictions",
 				"required": True
 			}],
 
