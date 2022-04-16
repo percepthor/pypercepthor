@@ -25,10 +25,15 @@ class Module (Schema):
 				"required": True
 			},
 
+			"logo": {
+				"type": Types.String,
+				"required": True
+			},
+
 			"configuration": {
 				"type": Types.ObjectId,
 				"ref": "modules.configuration",
-				"required": True
+				"default": None
 			},
 
 			"date": {

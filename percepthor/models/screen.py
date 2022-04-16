@@ -12,6 +12,10 @@ class Screen (Schema):
 				"required": True
 			},
 
+			"name": {
+				"type": Types.String,
+				"required": True
+			},
 			"title": {
 				"type": Types.String,
 				"required": True
@@ -19,7 +23,7 @@ class Screen (Schema):
 
 			"components": [{
 				"type": Types.ObjectId,
-				"ref": "components",
+				"ref": "modules.components",
 				"required": True
 			}],
 

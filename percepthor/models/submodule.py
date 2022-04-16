@@ -55,7 +55,7 @@ class Submodule (Schema):
 			"configuration": {
 				"type": Types.ObjectId,
 				"ref": "submodules.configuration",
-				"required": True
+				"default": None
 			},
 
 			"date": {

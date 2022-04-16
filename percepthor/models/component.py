@@ -106,9 +106,19 @@ class Component (Schema):
 				"required": True
 			},
 
+			"screen": {
+				"type": Types.ObjectId,
+				"ref": "modules.screens"
+			},
+
 			"component_type": {
 				"type": Types.Number,
 				"default": COMPONENT_TYPE_NONE
+			},
+
+			"index": {
+				"type": Types.Number,
+				"required": True
 			},
 			
 			"name": {
@@ -150,25 +160,25 @@ class Component (Schema):
 
 			"photo_types": {
 				"type": Types.ObjectId,
-				"ref": "photo.types",
+				"ref": "modules.photo.types",
 				"default": None
 			},
 
-			"components": [{
+			"children": [{
 				"type": Types.ObjectId,
-				"ref": "components",
+				"ref": "modules.components",
 				"required": False
 			}],
 
 			"restrictions": [{
 				"type": Types.ObjectId,
-				"ref": "restrictions",
+				"ref": "modules.restrictions",
 				"required": False
 			}],
 
 			"conditions": [{
 				"type": Types.ObjectId,
-				"ref": "conditions",
+				"ref": "modules.conditions",
 				"required": False
 			}],
 
@@ -179,7 +189,7 @@ class Component (Schema):
 
 			"actions": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 

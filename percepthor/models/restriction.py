@@ -86,6 +86,18 @@ class Restriction (Schema):
 				"required": True
 			},
 
+			"component": {
+				"type": Types.ObjectId,
+				"ref": "modules.components",
+				"default": None
+			},
+
+			"condition": {
+				"type": Types.ObjectId,
+				"ref": "modules.conditions",
+				"default": None
+			},
+
 			"restriction_type": {
 				"type": Types.Number,
 				"default": RESTRICTION_TYPE_NONE

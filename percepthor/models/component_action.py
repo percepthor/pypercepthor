@@ -100,11 +100,11 @@ class ComponentAction (Schema):
 			},
 			"screen": {
 				"type": Types.String,
-				"required": True
+				"default": None
 			},
 			"route": {
 				"type": Types.String,
-				"required": True
+				"default": None
 			},
 			"method": {
 				"type": Types.Number,
