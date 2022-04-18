@@ -44,6 +44,10 @@ class Service (Schema):
 				"default": SERVICE_STATUS_NONE
 			},
 
+			"alias": {
+				"type": Types.String,
+				"required": True
+			},
 			"name": {
 				"type": Types.String,
 				"required": True
