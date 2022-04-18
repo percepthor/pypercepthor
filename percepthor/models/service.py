@@ -56,6 +56,10 @@ class Service (Schema):
 				"type": Types.String,
 				"required": True
 			},
+			"next_instance": {
+				"type": Types.Number,
+				"default": 0
+			},
 			"next_value": {
 				"type": Types.Number,
 				"default": 0
