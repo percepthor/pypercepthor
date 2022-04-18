@@ -40,6 +40,10 @@ class ServiceInstance (Schema):
 				"type": Types.Number,
 				"default": SERVICE_INSTANCE_TYPE_NONE
 			},
+			"instance_idx": {
+				"type": Types.Number,
+				"required": True
+			},
 
 			"status": {
 				"type": Types.Number,
