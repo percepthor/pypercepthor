@@ -123,7 +123,7 @@ class Storage (Schema):
 			},
 			"description": {
 				"type": Types.String,
-				"default": None,
+				"default": None
 			},
 
 			"scope": {
@@ -133,17 +133,17 @@ class Storage (Schema):
 			"service": {
 				"type": Types.ObjectId,
 				"ref": "services",
-				"default": None,
+				"default": None
 			},
 			"organization": {
 				"type": Types.ObjectId,
 				"ref": "organizations",
-				"default": None,
+				"default": None
 			},
 			"project": {
 				"type": Types.ObjectId,
 				"ref": "projects",
-				"default": None,
+				"default": None
 			},
 
 			"path": {

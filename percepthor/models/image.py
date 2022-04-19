@@ -37,13 +37,13 @@ class Image (Schema):
 			"storage": {
 				"type": Types.ObjectId,
 				"ref": "storages",
-				"default": None,
+				"default": None
 			},
 
 			"organization": {
 				"type": Types.ObjectId,
 				"ref": "organizations",
-				"default": None,
+				"default": None
 			},
 
 			"image_type": {

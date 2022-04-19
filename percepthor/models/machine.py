@@ -36,7 +36,7 @@ class Machine (Schema):
 			},
 			"description": {
 				"type": Types.String,
-				"default": None,
+				"default": None
 			},
 			
 			"machine_type": {
