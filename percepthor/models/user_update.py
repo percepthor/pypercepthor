@@ -11,7 +11,7 @@ class UserUpdate (Schema):
 			"user": {
 				"type": Types.ObjectId,
 				"ref": "users",
-				"default": None
+				"required": True
 			},
 
 			"prev_status": {

@@ -11,7 +11,7 @@ class MachineUpdate (Schema):
 			"machine": {
 				"type": Types.ObjectId,
 				"ref": "machines",
-				"default": None
+				"required": True
 			},
 
 			"prev_status": {

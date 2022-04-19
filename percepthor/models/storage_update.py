@@ -11,7 +11,7 @@ class StorageUpdate (Schema):
 			"storage": {
 				"type": Types.ObjectId,
 				"ref": "storages",
-				"default": None
+				"required": True
 			},
 
 			"prev_status": {
