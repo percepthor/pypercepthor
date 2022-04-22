@@ -1,6 +1,8 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
+from models.user_status import USER_STATUS_NONE
+
 class User (Schema):
 	schema_name = "users"
 
@@ -23,6 +25,11 @@ class User (Schema):
 			"username": {
 				"type": Types.String,
 				"required": True
+			},
+
+			"status": {
+				"type": Types.Number,
+				"default": USER_STATUS_NONE
 			},
 
 			"password": {
