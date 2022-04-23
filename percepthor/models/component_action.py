@@ -127,4 +127,4 @@ class ComponentAction (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"ComponentAction: {self.id} - {self.user}"
+		return f"ComponentAction: {self.id}"

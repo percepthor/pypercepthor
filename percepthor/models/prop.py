@@ -58,4 +58,4 @@ class Prop (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Prop: {self.id} - {self.user}"
+		return f"Prop: {self.id}"

@@ -33,4 +33,4 @@ class PhotoTypes (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"PhotoTypes: {self.id} - {self.user}"
+		return f"PhotoTypes: {self.id}"

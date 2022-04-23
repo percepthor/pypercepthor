@@ -53,4 +53,4 @@ class SubmoduleConfiguration (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Submodule: {self.id} - {self.user}"
+		return f"SubmoduleConfiguration: {self.id}"

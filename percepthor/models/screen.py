@@ -36,4 +36,4 @@ class Screen (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Screen: {self.id} - {self.user}"
+		return f"Screen: {self.id}"
