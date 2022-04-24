@@ -14,29 +14,29 @@ class SubmoduleConfiguration (Schema):
 
 			"props": [{
 				"type": Types.ObjectId,
-				"ref": "props",
+				"ref": "modules.props",
 				"required": True
 			}],
 
 			"screens": [{
 				"type": Types.ObjectId,
-				"ref": "screens",
+				"ref": "modules.screens",
 				"required": True
 			}],
 
 			"on_submit": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 			"on_next_screen": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 			"when_completed": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 
