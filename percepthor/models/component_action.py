@@ -35,20 +35,20 @@ def action_type_to_string (action_type: int):
 
 	return result
 
-SCOPE_NONE = 0
-SCOPE_LOCAL = 1
-SCOPE_GLOBAL = 2
+SCOPE_TYPE_NONE = 0
+SCOPE_TYPE_LOCAL = 1
+SCOPE_TYPE_GLOBAL = 2
 
 def scope_to_string (scope: int):
 	result = "Undefined"
 
-	if (scope == SCOPE_NONE):
+	if (scope == SCOPE_TYPE_NONE):
 		pass
 
-	elif (scope == SCOPE_LOCAL):
+	elif (scope == SCOPE_TYPE_LOCAL):
 		result = "Local"
 
-	elif (scope == SCOPE_GLOBAL):
+	elif (scope == SCOPE_TYPE_GLOBAL):
 		result = "Global"
 
 	return result
@@ -96,7 +96,7 @@ class ComponentAction (Schema):
 			},
 			"scope": {
 				"type": Types.Number,
-				"default": SCOPE_NONE
+				"default": SCOPE_TYPE_NONE
 			},
 			"screen": {
 				"type": Types.String,
