@@ -76,4 +76,4 @@ class ModuleConfiguration (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Module: {self.id}"
+		return f"ModuleConfiguration: {self.id}"
