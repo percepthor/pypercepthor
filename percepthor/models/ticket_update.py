@@ -1,6 +1,8 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
+from models.ticket_status import TICKET_STATUS_NONE
+
 class TicketUpdate (Schema):
 	schema_name = "tickets.updates"
 
@@ -14,11 +16,11 @@ class TicketUpdate (Schema):
 
 			"prev_status": {
 				"type": Types.Number,
-				"default": 0
+				"default": TICKET_STATUS_NONE
 			},
 			"current_status": {
 				"type": Types.Number,
-				"default": 0
+				"default": TICKET_STATUS_NONE
 			},
 
 			"date": {
