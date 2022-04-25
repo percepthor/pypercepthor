@@ -15,10 +15,10 @@ def storage_type_to_string (storage_type: int):
 		pass
 
 	elif (storage_type == STORAGE_TYPE_LOCAL):
-		result = "Available"
+		result = "Local"
 
 	elif (storage_type == STORAGE_TYPE_CLOUD):
-		result = "Maintenance"
+		result = "Cloud"
 
 	elif (storage_type == STORAGE_TYPE_BUCKET):
 		result = "Bucket"
@@ -94,16 +94,16 @@ class Storage (Schema):
 
 	def __init__ (self, **kwargs):
 		self.schema = {
-			"machine": {
-				"type": Types.ObjectId,
-				"ref": "machines",
-				"required": True
-			},
-
 			"storage_type": {
 				"type": Types.Number,
 				"default": STORAGE_TYPE_NONE
 			},
+			"disk": {
+				"type": Types.ObjectId,
+				"ref": "disks",
+				"default": None
+			},
+
 			"status": {
 				"type": Types.Number,
 				"default": STORAGE_STATUS_NONE
