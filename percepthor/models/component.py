@@ -1,6 +1,8 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
+from models.field_types import FIELD_TYPE_NONE
+
 COMPONENT_TYPE_NONE = 0
 COMPONENT_TYPE_PHOTO = 1
 COMPONENT_TYPE_COUNTER = 2
@@ -51,48 +53,6 @@ def button_type_to_string (button_type: int):
 	elif (button_type == BUTTON_TYPE_ELEVATED):
 		result = "Elevated"
 
-	return result
-
-FIELD_TYPE_NONE = 0
-FIELD_TYPE_NUMBER = 1
-FIELD_TYPE_STRING = 2
-FIELD_TYPE_PHOTO = 3
-FIELD_TYPE_ITEM = 4
-FIELD_TYPE_ITEM_LIST = 5
-FIELD_TYPE_NUMBER_LIST = 6
-FIELD_TYPE_STRING_LIST = 7
-FIELD_TYPE_DICT_LIST = 8
-
-def field_type_to_string (field_type: int):
-	result = "Undefined"
-
-	if (field_type == FIELD_TYPE_NONE):
-		pass
-
-	elif (field_type == FIELD_TYPE_NUMBER):
-		result = "Number"
-
-	elif (field_type == FIELD_TYPE_STRING):
-		result = "String"
-
-	elif (field_type == FIELD_TYPE_PHOTO):
-		result = "Photo"
-
-	elif (field_type == FIELD_TYPE_ITEM):
-		result = "Item"
-
-	elif (field_type == FIELD_TYPE_ITEM_LIST):
-		result = "Item List"
-
-	elif (field_type == FIELD_TYPE_NUMBER_LIST):
-		result = "Number List"
-
-	elif (field_type == FIELD_TYPE_STRING_LIST):
-		result = "String List"
-
-	elif (field_type == FIELD_TYPE_DICT_LIST):
-		result = "Dict List"
-	
 	return result
 
 class Component (Schema):
