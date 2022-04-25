@@ -17,6 +17,10 @@ class SubmoduleSchema (Schema):
 				"required": True
 			},
 
+			"props": {
+				# we expect dynamic data
+			},
+
 			"data": {
 				# we expect dynamic data
 			},
