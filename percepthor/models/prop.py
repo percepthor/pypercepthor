@@ -1,6 +1,8 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
+from models.field_types import FIELD_TYPE_NONE
+
 PROP_TYPE_NONE = 0
 PROP_TYPE_STORE = 1
 PROP_TYPE_LOCATION = 2
@@ -37,6 +39,10 @@ class Prop (Schema):
 			"p_type": {
 				"type": Types.Number,
 				"default": PROP_TYPE_NONE
+			},
+			"field_type": {
+				"type": Types.Number,
+				"default": FIELD_TYPE_NONE
 			},
 
 			"select": [{
