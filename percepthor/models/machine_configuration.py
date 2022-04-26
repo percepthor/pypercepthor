@@ -36,7 +36,7 @@ class MachineConfiguration (Schema):
 			"gpus": {
 				"gpu_type": {
 					"type": Types.String,
-					"required": True
+					"default": None
 				},
 				"count": {
 					"type": Types.Number,
