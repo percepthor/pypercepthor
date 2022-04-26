@@ -20,27 +20,6 @@ class ServiceDocumentation (Schema):
 				"type": Types.Boolean,
 				"default": False
 			},
-
-			# TODO:
-			"routes": [{
-				"name": None,
-				"description": None,
-				"path": None,
-				"fields": [
-					{
-						"name": "cuc",
-						"field_type": 2,
-						"required": True,
-						"default": "123"
-					},
-					{
-						"name": "image",
-						"field_type": 3,
-						"required": True,
-						"default": "refri-test.jpg"
-					}
-				]
-			}],
 			
 			"date": {
 				"type": Types.Date,
