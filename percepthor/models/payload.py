@@ -35,6 +35,10 @@ class Payload (Schema):
 				"default": PAYLOAD_STATUS_NONE
 			},
 
+			"props": {
+				# we expect dynamic data
+			},
+
 			"data": {
 				# we expect dynamic data
 			},
