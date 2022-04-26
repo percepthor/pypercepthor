@@ -6,6 +6,12 @@ class NetworkDomain (Schema):
 
 	def __init__ (self, **kwargs):
 		self.schema = {
+			"network": {
+				"type": Types.ObjectId,
+				"ref": "networks",
+				"required": True
+			},
+
 			"name": {
 				"type": Types.String,
 				"required": True
