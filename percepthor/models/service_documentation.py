@@ -1,29 +1,26 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
-class PhotoTypes (Schema):
-	schema_name = "modules.photo.types"
+class ServiceDocumentation (Schema):
+	schema_name = "services.documentation"
 
 	def __init__ (self, **kwargs):
-		self.schema = {
-			"submodule": {
+		self.schema = self.schema = {
+			"service": {
 				"type": Types.ObjectId,
-				"ref": "submodules",
-				"required": True
+				"ref": "services",
+				"default": None
 			},
 
-			"question": {
+			"filename": {
 				"type": Types.String,
-				"required": True
+				"default": None
 			},
-			"suffix": {
-				"type": Types.String,
-				"required": True
+			"sandbox": {
+				"type": Types.Boolean,
+				"default": False
 			},
-			"options": {
-				# we expect dynamic types
-			},
-
+			
 			"date": {
 				"type": Types.Date,
 				"default": datetime.datetime.utcnow ()
@@ -33,4 +30,4 @@ class PhotoTypes (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"PhotoTypes: {self.id}"
+		return f"ServiceDocumentation: {self.id}"

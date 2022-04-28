@@ -1,27 +1,26 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
-class PhotoTypes (Schema):
-	schema_name = "modules.photo.types"
+from models.payload_status import PAYLOAD_STATUS_NONE
+
+class PayloadUpdate (Schema):
+	schema_name = "payloads.updates"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
-			"submodule": {
+			"payload": {
 				"type": Types.ObjectId,
-				"ref": "submodules",
+				"ref": "payloads",
 				"required": True
 			},
 
-			"question": {
-				"type": Types.String,
-				"required": True
+			"prev_status": {
+				"type": Types.Number,
+				"default": PAYLOAD_STATUS_NONE
 			},
-			"suffix": {
-				"type": Types.String,
-				"required": True
-			},
-			"options": {
-				# we expect dynamic types
+			"current_status": {
+				"type": Types.Number,
+				"default": PAYLOAD_STATUS_NONE
 			},
 
 			"date": {
@@ -33,4 +32,4 @@ class PhotoTypes (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"PhotoTypes: {self.id}"
+		return f"Payload: {self.id}"

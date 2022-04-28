@@ -57,4 +57,4 @@ class Condition (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Condition: {self.id} - {self.user}"
+		return f"Condition: {self.id}"

@@ -1,8 +1,8 @@
 import datetime
 from pymongoose.mongo_types import Types, Schema
 
-class PhotoTypes (Schema):
-	schema_name = "modules.photo.types"
+class SubmoduleSchema (Schema):
+	schema_name = "submodules.schema"
 
 	def __init__ (self, **kwargs):
 		self.schema = {
@@ -11,17 +11,18 @@ class PhotoTypes (Schema):
 				"ref": "submodules",
 				"required": True
 			},
+			"configuration": {
+				"type": Types.ObjectId,
+				"ref": "submodules.configuration",
+				"required": True
+			},
 
-			"question": {
-				"type": Types.String,
-				"required": True
+			"props": {
+				# we expect dynamic data
 			},
-			"suffix": {
-				"type": Types.String,
-				"required": True
-			},
-			"options": {
-				# we expect dynamic types
+
+			"data": {
+				# we expect dynamic data
 			},
 
 			"date": {
@@ -33,4 +34,4 @@ class PhotoTypes (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"PhotoTypes: {self.id}"
+		return f"SubmoduleSchema: {self.id}"

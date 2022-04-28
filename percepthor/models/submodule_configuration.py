@@ -14,29 +14,29 @@ class SubmoduleConfiguration (Schema):
 
 			"props": [{
 				"type": Types.ObjectId,
-				"ref": "props",
+				"ref": "modules.props",
 				"required": True
 			}],
 
 			"screens": [{
 				"type": Types.ObjectId,
-				"ref": "screens",
+				"ref": "modules.screens",
 				"required": True
 			}],
 
 			"on_submit": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 			"on_next_screen": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 			"when_completed": [{
 				"type": Types.ObjectId,
-				"ref": "components.actions",
+				"ref": "modules.components.actions",
 				"required": False
 			}],
 
@@ -53,4 +53,4 @@ class SubmoduleConfiguration (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Submodule: {self.id} - {self.user}"
+		return f"SubmoduleConfiguration: {self.id}"

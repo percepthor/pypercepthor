@@ -45,4 +45,4 @@ class Module (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Module: {self.id} - {self.user}"
+		return f"Module: {self.id}"

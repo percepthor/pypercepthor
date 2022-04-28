@@ -27,6 +27,24 @@ def submodule_type_to_string (submodule_type: int):
 
 	return result
 
+SUBMODULE_PROCESS_NONE = 0
+SUBMODULE_PROCESS_REAL = 1
+SUBMODULE_PROCESS_WORK = 2
+
+def submodule_process_to_string (process: int):
+	result = "Undefined"
+
+	if (process == SUBMODULE_PROCESS_NONE):
+		pass
+
+	elif (process == SUBMODULE_PROCESS_REAL):
+		result = "Real"
+
+	elif (process == SUBMODULE_PROCESS_WORK):
+		result = "Work"
+
+	return result
+
 class Submodule (Schema):
 	schema_name = "submodules"
 
@@ -51,6 +69,10 @@ class Submodule (Schema):
 				"type": Types.Number,
 				"default": SUBMODULE_TYPE_NONE
 			},
+			"process": {
+				"type": Types.Number,
+				"default": SUBMODULE_PROCESS_NONE
+			},
 
 			"configuration": {
 				"type": Types.ObjectId,
@@ -67,4 +89,4 @@ class Submodule (Schema):
 		super ().__init__ (self.schema_name, self.schema, kwargs)
 
 	def __str__ (self):
-		return f"Submodule: {self.id} - {self.user}"
+		return f"Submodule: {self.id}"

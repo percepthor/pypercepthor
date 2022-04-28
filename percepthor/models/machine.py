@@ -38,7 +38,7 @@ class Machine (Schema):
 				"type": Types.String,
 				"default": None
 			},
-			
+
 			"machine_type": {
 				"type": Types.Number,
 				"default": MACHINE_TYPE_NONE
@@ -46,6 +46,21 @@ class Machine (Schema):
 			"status": {
 				"type": Types.Number,
 				"default": MACHINE_STATUS_NONE
+			},
+
+			"region": {
+				"type": Types.String,
+				"default": None
+			},
+			"zone": {
+				"type": Types.String,
+				"default": None
+			},
+
+			"configuration": {
+				"type": Types.ObjectId,
+				"ref": "machines.configuration",
+				"default": None
 			},
 
 			"date": {
