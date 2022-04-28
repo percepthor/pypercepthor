@@ -1,23 +1,23 @@
 ## General
-- Added dedicated optical related types definitions
+- Added base dedicated image events types definitions
 
 ## Models
-- Added dedicated service status definitions & methods
-- Added type & status in service model implementation
-- Added base service instance model implementation
-- Added dedicated service status update definition
-- Added alias field in service model implementation
-- Added base dedicated machine model implementation
-- Added machine status types definitions & methods
-- Added custom model to keep track of machine updates
-- Added base dedicated storage model implementation
-- Added storage status types definitions & methods
-- Added custom model to keep track of storage updates
-- Added dedicated images status definitions & methods
-- Added custom model to keep track of images updates
-- Added dedicated percepthor user status types & methods
-- Added custom model to keep track of users updates
-- Added dedicated workers status definitions & methods
-- Added base custom worker model implementation
-- Added custom model to keep track of workers updates
-- Added base worker instance model implementation
+- Added base submodule schema model implementation
+- Moved general field types to dedicated model sources
+- Refactored component action custom scope types definitions
+- Added submodule process types definitions & methods
+- Added base percepthor payload model implementation
+- Added dedicated payload model status related definitions
+- Added custom model to keep track of payload status
+- Added base machine configuration model implementation
+- Added region & zone fields in machine model definition
+- Moved ticket status definitions to dedicated sources
+- Added base percepthor disk model implementation
+- Added dedicated disk model status definitions & methods
+- Added custom model to keep track of disk updates
+- Added base service documentation model implementation
+- Added custom percepthor network model implementation
+- Added dedicated network domain model definition
+- Added custom service documentation route definition
+- Added base component configuration implementation
+- Added dedicated field type in prop model definition
