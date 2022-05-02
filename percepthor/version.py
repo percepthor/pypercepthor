@@ -1,9 +1,11 @@
 from cerver.utils.log import LOG_TYPE_NONE, cerver_log_both
 
-PERCEPTHOR_VERSION = "0.4"
-PERCEPTHOR_VERSION_NAME = "Version 0.4"
-PERCEPTHOR_VERSION_DATE = "27/04/2022"
-PERCEPTHOR_VERSION_TIME = "20:48 CST"
+from .lib import lib
+
+PERCEPTHOR_VERSION = "0.5"
+PERCEPTHOR_VERSION_NAME = "Version 0.5"
+PERCEPTHOR_VERSION_DATE = "02/05/2022"
+PERCEPTHOR_VERSION_TIME = "00:58 CST"
 PERCEPTHOR_VERSION_AUTHOR = "Erick Salas"
 
 version = {
@@ -13,6 +15,10 @@ version = {
 	"time": PERCEPTHOR_VERSION_TIME,
 	"author": PERCEPTHOR_VERSION_AUTHOR
 }
+
+percepthor_libauth_version_print_full = lib.percepthor_libauth_version_print_full
+percepthor_libauth_version_print_version_id = lib.percepthor_libauth_version_print_version_id
+percepthor_libauth_version_print_version_name = lib.percepthor_libauth_version_print_version_name
 
 def pypercepthor_version_print_full ():
 	output = "\nPyPercepthor Version: {name}\n" \
