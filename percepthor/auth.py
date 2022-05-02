@@ -62,9 +62,9 @@ percepthor_auth_create.argtypes = [c_int]
 percepthor_auth_create.restype = c_void_p
 
 percepthor_single_authentication = lib.percepthor_single_authentication
-percepthor_single_authentication.argtypes = [c_void_p, c_void_p, c_char_p, c_char_p]
+percepthor_single_authentication.argtypes = [c_void_p, c_void_p, c_int, c_char_p, c_char_p]
 percepthor_single_authentication.restype = c_uint
 
-percepthor_management_authentication = lib.percepthor_management_authentication
-percepthor_management_authentication.argtypes = [c_void_p, c_void_p]
-percepthor_management_authentication.restype = c_uint
+percepthor_custom_authentication_handler = lib.percepthor_custom_authentication_handler
+percepthor_custom_authentication_handler.argtypes = [c_void_p, c_void_p]
+percepthor_custom_authentication_handler.restype = c_uint
