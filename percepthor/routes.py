@@ -5,6 +5,9 @@ from .lib import lib
 auth_route_delete = lib.auth_route_delete
 auth_route_delete.argtypes = [c_void_p]
 
+auth_route_create = lib.auth_route_create
+auth_route_create.restype = c_void_p
+
 auth_route_create_action = lib.auth_route_create_action
 auth_route_create_action.argtypes = [c_char_p]
 auth_route_create_action.restype = c_void_p
