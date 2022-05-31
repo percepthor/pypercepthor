@@ -9,6 +9,12 @@ from cerver.http import http_route_set_delete_custom_data
 from cerver.http import http_route_set_auth
 from cerver.http import http_route_set_authentication_handler
 
+from cerver.http import http_cerver_enable_admin_routes
+from cerver.http import http_cerver_admin_routes_set_custom_data
+from cerver.http import http_cerver_admin_routes_set_delete_custom_data
+from cerver.http import http_cerver_enable_admin_routes_authentication
+from cerver.http import http_cerver_admin_routes_set_authentication_handler
+
 from .lib import lib
 
 from .auth import PERCEPTHOR_AUTH_SCOPE_MANAGEMENT
@@ -109,3 +115,12 @@ def percepthor_management_route_create (
 	))
 
 	return management_route
+
+def percepthor_admin_routes_configuration (http_cerver: c_void_p):
+	http_cerver_enable_admin_routes (http_cerver, True)
+	http_cerver_enable_admin_routes_authentication (http_cerver, HTTP_ROUTE_AUTH_TYPE_CUSTOM)
+	http_cerver_admin_routes_set_custom_data (http_cerver, auth_route_create ())
+	# http_cerver_admin_routes_set_delete_custom_data (http_cerver, auth_route_delete)
+	http_cerver_admin_routes_set_authentication_handler (
+		http_cerver, percepthor_custom_authentication_handler
+	)
