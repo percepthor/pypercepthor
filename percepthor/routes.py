@@ -110,9 +110,13 @@ def percepthor_management_route_create (
 ) -> c_void_p:
 	management_route = percepthor_route_create_internal (method, path, handler)
 
-	http_route_set_custom_data (management_route, auth_route_create_permissions (
-		PERCEPTHOR_AUTH_SCOPE_MANAGEMENT, permissions, action.encode ("utf-8")
-	))
+	http_route_set_custom_data (
+		management_route,
+		auth_route_create_permissions (
+			PERCEPTHOR_AUTH_SCOPE_MANAGEMENT, permissions,
+			action.encode ("utf-8") if (action) else None
+		)
+	)
 
 	return management_route
 
