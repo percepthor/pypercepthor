@@ -4,10 +4,10 @@ from .lib import lib
 
 PermissionsType = c_int
 
-PERMISSIONS_TYPE_NONE = 1
-PERMISSIONS_TYPE_SERVICE = 2
-PERMISSIONS_TYPE_ORGANIZATION = 3
-PERMISSIONS_TYPE_PROJECT = 4
+PERMISSIONS_TYPE_NONE = 0
+PERMISSIONS_TYPE_SERVICE = 1
+PERMISSIONS_TYPE_ORGANIZATION = 2
+PERMISSIONS_TYPE_PROJECT = 3
 
 permissions_type_to_string = lib.permissions_type_to_string
 permissions_type_to_string.argtypes = [c_int]
