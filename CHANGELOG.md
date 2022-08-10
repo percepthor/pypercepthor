@@ -1,3 +1,3 @@
 ## Auth
-- Added dedicated resources permissions custom type definition
-- Added custom wrapper methods to create percepthor routes
+- Added dedicated HTTP admin routes configuration method
+- Handling optional actions when creating management route
