@@ -17,6 +17,7 @@ from cerver.http import http_cerver_admin_routes_set_authentication_handler
 
 from .lib import lib
 
+from .auth import PERCEPTHOR_AUTH_SCOPE_SINGLE
 from .auth import PERCEPTHOR_AUTH_SCOPE_MANAGEMENT
 from .auth import percepthor_custom_authentication_handler
 from .permissions import PermissionsType
@@ -100,9 +101,20 @@ def percepthor_service_route_create (
 	return service_route
 
 def percepthor_single_route_create (
-	method: RequestMethod, path: str, handler: HttpHandler
+	method: RequestMethod, path: str, handler: HttpHandler,
+	permissions: PermissionsType, action: str
 ) -> c_void_p:
-	return http_route_create (method, path.encode ("utf-8"), handler)
+	single_route = http_route_create (method, path.encode ("utf-8"), handler)
+
+	http_route_set_custom_data (
+		single_route,
+		auth_route_create_permissions (
+			PERCEPTHOR_AUTH_SCOPE_SINGLE, permissions,
+			action.encode ("utf-8")
+		)
+	)
+
+	return single_route
 
 def percepthor_management_route_create (
 	method: RequestMethod, path: str, handler: HttpHandler,

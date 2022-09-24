@@ -98,7 +98,7 @@ percepthor_auth_print_token = lib.percepthor_auth_print_token
 percepthor_auth_print_token.argtypes = [c_void_p]
 
 percepthor_single_authentication = lib.percepthor_single_authentication
-percepthor_single_authentication.argtypes = [c_void_p, c_void_p, c_int, c_char_p, c_char_p]
+percepthor_single_authentication.argtypes = [c_void_p, c_void_p, c_char_p]
 percepthor_single_authentication.restype = c_uint
 
 percepthor_custom_authentication_handler = lib.percepthor_custom_authentication_handler
