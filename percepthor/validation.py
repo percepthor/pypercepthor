@@ -23,7 +23,7 @@ def percepthor_query_value_from_params (
 		errors[name] = f"Field {name} is required."
 
 def percepthor_query_value_from_params_with_cast (
-	query: dict, params: c_void_p, name: str, cast: Callable (Any), errors: dict
+	query: dict, params: c_void_p, name: str, cast: Callable [[str], Any], errors: dict
 ):
 	found = http_query_pairs_get_value (params, name.encode ("utf-8"))
 	if (found):
@@ -44,7 +44,7 @@ def percepthor_query_optional_value_from_params (
 		query[name] = found.contents.str.decode ("utf-8")
 
 def percepthor_query_optional_value_from_params_with_cast (
-	query: dict, params: c_void_p, name: str, cast: Callable (Any), errors: dict
+	query: dict, params: c_void_p, name: str, cast: Callable [[str], Any], errors: dict
 ):
 	found = http_query_pairs_get_value (params, name.encode ("utf-8"))
 	if (found):
