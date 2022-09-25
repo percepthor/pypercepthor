@@ -1,8 +1,12 @@
-from ctypes import c_void_p
+from ctypes import POINTER, c_void_p
 import distutils.util
+import json
 from typing import Any, Callable
 
+from cerver.types import String
+
 from cerver.http import http_query_pairs_get_value
+from cerver.http import http_request_get_body
 
 def percepthor_query_value_from_params (
 	query: dict, params: c_void_p, name: str, errors: dict
@@ -19,7 +23,7 @@ def percepthor_query_value_from_params (
 		errors[name] = f"Field {name} is required."
 
 def percepthor_query_value_from_params_with_cast (
-	query: dict, params: c_void_p, name: str, cast: Callable (Any), errors: dict
+	query: dict, params: c_void_p, name: str, cast: Callable [[str], Any], errors: dict
 ):
 	found = http_query_pairs_get_value (params, name.encode ("utf-8"))
 	if (found):
@@ -40,7 +44,7 @@ def percepthor_query_optional_value_from_params (
 		query[name] = found.contents.str.decode ("utf-8")
 
 def percepthor_query_optional_value_from_params_with_cast (
-	query: dict, params: c_void_p, name: str, cast: Callable (Any), errors: dict
+	query: dict, params: c_void_p, name: str, cast: Callable [[str], Any], errors: dict
 ):
 	found = http_query_pairs_get_value (params, name.encode ("utf-8"))
 	if (found):
@@ -49,23 +53,6 @@ def percepthor_query_optional_value_from_params_with_cast (
 
 		except:
 			errors[name] = f"Field {name} is invalid."
-
-def validate_query_value_with_cast (
-	values: c_void_p, query_name: str, cast: Callable (Any), errors: dict
-):
-	result = None
-
-	found = http_query_pairs_get_value (values, query_name.encode ("utf-8"))
-	if (found):
-		try:
-			query_value = found.contents.str.decode ("utf-8")
-
-			result = cast (query_value)
-
-		except:
-			errors[query_name] = f"Field {query_name} is invalid."
-
-	return result
 
 def percepthor_query_int_value_from_params (
 	query: dict, params: c_void_p, name: str, errors: dict
@@ -163,3 +150,20 @@ def percepthor_query_bool_optional_value_from_params (
 			)
 		except ValueError:
 			errors[name] = f"Field {name} is invalid."
+
+def percepthor_handle_body_input (
+	request: c_void_p, handle_body_input: Callable [[dict, dict], dict], errors: dict
+) -> dict:
+	values = None
+
+	body_json: POINTER (String) = http_request_get_body (request)
+
+	if (body_json is not None):
+		loaded_json: dict = json.loads (body_json.contents.str)
+
+		handle_body_input (loaded_json, errors)
+
+	else:
+		errors["body"] = "Request body input is required!"
+
+	return values
