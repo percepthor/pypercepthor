@@ -161,7 +161,7 @@ def percepthor_handle_body_input (
 	if (body_json is not None):
 		loaded_json: dict = json.loads (body_json.contents.str)
 
-		handle_body_input (loaded_json, errors)
+		values = handle_body_input (loaded_json, errors)
 
 	else:
 		errors["body"] = "Request body input is required!"
