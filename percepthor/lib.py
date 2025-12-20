@@ -8,11 +8,12 @@ and at last from the paths of the system linker.
 import ctypes
 import ctypes.util
 import os
+from typing import Any
 
 __all__ = [
 	"AUTH_LIBRARY_VARIABLE", "AUTH_LIBRARY_DEFAULT_PATH", "AUTH_LIBRARY_NAME",
 	"AuthLibraryError",
-	"lib"
+	"lib", "auth_functions", "auth_function"
 ]
 
 AUTH_LIBRARY_VARIABLE = "AUTH_LIBRARY"
@@ -67,3 +68,28 @@ def auth_load () -> ctypes.CDLL:
 	return library
 
 lib = auth_load ()
+
+# every function that the package declares, by its name in libauth
+auth_functions: dict = {}
+
+def auth_function (name: str, argtypes: list, restype: Any, doc: str) -> Any:
+	"""Declares a function of libauth with its types and its documentation.
+
+	Args:
+		name: The name of the function in libauth.
+		argtypes: The ctypes of its arguments, [] for a function without them.
+		restype: The ctypes of its result, None when it returns nothing.
+		doc: Its docstring.
+
+	Returns:
+		The function of the library, ready to be called.
+	"""
+	function = getattr (lib, name)
+
+	function.argtypes = argtypes
+	function.restype = restype
+	function.__doc__ = doc
+
+	auth_functions[name] = function
+
+	return function
