@@ -13,12 +13,14 @@ from typing import Any
 __all__ = [
 	"AUTH_LIBRARY_VARIABLE", "AUTH_LIBRARY_DEFAULT_PATH", "AUTH_LIBRARY_NAME",
 	"AuthLibraryError",
-	"lib", "auth_functions", "auth_function"
+	"lib", "auth_functions", "auth_function", "auth_c_string", "auth_text"
 ]
 
 AUTH_LIBRARY_VARIABLE = "AUTH_LIBRARY"
 AUTH_LIBRARY_DEFAULT_PATH = "/usr/local/lib/libauth.so"
 AUTH_LIBRARY_NAME = "auth"
+
+TEXT_ENCODING = "utf-8"
 
 class AuthLibraryError (ImportError):
 	"""Raised when libauth can not be found or loaded."""
@@ -93,3 +95,37 @@ def auth_function (name: str, argtypes: list, restype: Any, doc: str) -> Any:
 	auth_functions[name] = function
 
 	return function
+
+def auth_c_string (value: str | bytes | None) -> bytes | None:
+	"""Converts a value given by the caller into the bytes that a C string argument expects.
+
+	Args:
+		value: A str (encoded as utf-8), bytes or None (NULL).
+
+	Returns:
+		The bytes, or None.
+	"""
+	result = value
+	if (isinstance (value, str)):
+		result = value.encode (TEXT_ENCODING)
+
+	return result
+
+def auth_text (value: bytes | None) -> str | None:
+	"""Decodes the bytes of a C string that libauth returned.
+
+	Args:
+		value: The bytes, None for a NULL string.
+
+	Returns:
+		The text, None for NULL or for bytes that are not utf-8.
+	"""
+	result = None
+	if (value is not None):
+		try:
+			result = value.decode (TEXT_ENCODING)
+
+		except UnicodeDecodeError:
+			pass
+
+	return result
