@@ -43,24 +43,20 @@ percepthor_libauth_version_print_version_name = auth_function (
 	"""Prints the version name of libauth."""
 )
 
-def pypercepthor_version_print_full ():
-	output = "\nPyPercepthor Version: {name}\n" \
-		"Release Date: {date} - {time}\n" \
-		"Author: {author}\n".format (**version)
+def pypercepthor_version_print_full () -> None:
+	"""Prints the version of pypercepthor with its date and its author."""
+	output = (
+		"\nPyPercepthor Version: {name}\n"
+		"Release Date: {date} - {time}\n"
+		"Author: {author}\n"
+	).format (**version)
 
-	cerver_log_both (
-		LOG_TYPE_NONE, LOG_TYPE_NONE,
-		output.encode ("utf-8")
-	)
+	cerver_log_both (LOG_TYPE_NONE, LOG_TYPE_NONE, output)
 
-def pypercepthor_version_print_version_id ():
-	cerver_log_both (
-		LOG_TYPE_NONE, LOG_TYPE_NONE,
-		f"\nPyPercepthor Version ID: {version.id}\n".encode ("utf-8")
-	)
+def pypercepthor_version_print_version_id () -> None:
+	"""Prints the version id of pypercepthor."""
+	cerver_log_both (LOG_TYPE_NONE, LOG_TYPE_NONE, f"\nPyPercepthor Version ID: {version['id']}\n")
 
-def pypercepthor_version_print_version_name ():
-	cerver_log_both (
-		LOG_TYPE_NONE, LOG_TYPE_NONE,
-		f"\nPyPercepthor Version: {version.name}\n".encode ("utf-8")
-	)
+def pypercepthor_version_print_version_name () -> None:
+	"""Prints the version name of pypercepthor."""
+	cerver_log_both (LOG_TYPE_NONE, LOG_TYPE_NONE, f"\nPyPercepthor Version: {version['name']}\n")
