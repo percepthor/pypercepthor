@@ -1,6 +1,18 @@
-from cerver.utils.log import LOG_TYPE_NONE, cerver_log_both
+"""The versions of pypercepthor and of the libauth that it wraps."""
 
-from .lib import lib
+from cerver.utils import LOG_TYPE_NONE, cerver_log_both
+
+from .lib import auth_function
+
+__all__ = [
+	"PERCEPTHOR_VERSION", "PERCEPTHOR_VERSION_NAME", "PERCEPTHOR_VERSION_DATE",
+	"PERCEPTHOR_VERSION_TIME", "PERCEPTHOR_VERSION_AUTHOR",
+	"version",
+	"percepthor_libauth_version_print_full", "percepthor_libauth_version_print_version_id",
+	"percepthor_libauth_version_print_version_name",
+	"pypercepthor_version_print_full", "pypercepthor_version_print_version_id",
+	"pypercepthor_version_print_version_name"
+]
 
 PERCEPTHOR_VERSION = "0.6.2"
 PERCEPTHOR_VERSION_NAME = "Version 0.6.2"
@@ -16,9 +28,20 @@ version = {
 	"author": PERCEPTHOR_VERSION_AUTHOR
 }
 
-percepthor_libauth_version_print_full = lib.percepthor_libauth_version_print_full
-percepthor_libauth_version_print_version_id = lib.percepthor_libauth_version_print_version_id
-percepthor_libauth_version_print_version_name = lib.percepthor_libauth_version_print_version_name
+percepthor_libauth_version_print_full = auth_function (
+	"percepthor_libauth_version_print_full", [], None,
+	"""Prints the version of libauth with its date and its author."""
+)
+
+percepthor_libauth_version_print_version_id = auth_function (
+	"percepthor_libauth_version_print_version_id", [], None,
+	"""Prints the version id of libauth."""
+)
+
+percepthor_libauth_version_print_version_name = auth_function (
+	"percepthor_libauth_version_print_version_name", [], None,
+	"""Prints the version name of libauth."""
+)
 
 def pypercepthor_version_print_full ():
 	output = "\nPyPercepthor Version: {name}\n" \
