@@ -1,0 +1,27 @@
+# The MongoDB and the Redis of the test suites of the Python packages
+# (pypercepthor, py-cerver): the e2e tier of pypercepthor runs auth-service on them.
+# The name keeps them apart from the suites of the services, the clients and the workers.
+name: packages-tests
+
+services:
+  mongo-test:
+    image: mongo:7.0
+    container_name: packages-test-mongo
+    ports:
+      - "27022:27017"
+    tmpfs:
+      - /data/db
+    command: ["--noauth", "--bind_ip_all"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand ('ping')"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  redis-test:
+    image: redis/redis-stack-server:latest
+    container_name: packages-test-redis
+    ports:
+      - "6396:6379"
+    tmpfs:
+      - /data
