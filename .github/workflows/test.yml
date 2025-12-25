@@ -1,0 +1,111 @@
+name: Percepthor Tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+env:
+  CERVER_REPOSITORY: ermiry/cerver
+  CERVER_REF: 2.0b-64
+  PYCERVER_REPOSITORY: ermiry-com/py-cerver
+  PYCERVER_REF: '1.0'
+  LIBAUTH_REPOSITORY: percepthor/libauth
+  LIBAUTH_REF: '0.5'
+  AUTH_SERVICE_REPOSITORY: percepthor/auth-service
+  AUTH_SERVICE_REF: work
+
+jobs:
+  test:
+    name: Percepthor tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: ['', 'address,undefined']
+    env:
+      AUTH_SERVICE_TOKEN: ${{ secrets.AUTH_SERVICE_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout Cerver
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CERVER_REPOSITORY }}
+          ref: ${{ env.CERVER_REF }}
+          path: cerver
+
+      - name: Checkout PyCerver
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PYCERVER_REPOSITORY }}
+          ref: ${{ env.PYCERVER_REF }}
+          path: py-cerver
+
+      - name: Checkout LibAuth
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.LIBAUTH_REPOSITORY }}
+          ref: ${{ env.LIBAUTH_REF }}
+          path: libauth
+
+      - name: Checkout auth-service
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.AUTH_SERVICE_REPOSITORY }}
+          ref: ${{ env.AUTH_SERVICE_REF }}
+          token: ${{ env.AUTH_SERVICE_TOKEN }}
+          path: auth-service
+
+      - name: Move the sources out of the workspace
+        run: |
+          mv cerver py-cerver libauth "${RUNNER_TEMP}/"
+          if [ -d auth-service ]; then
+            mv auth-service "${RUNNER_TEMP}/"
+          else
+            mkdir -p "${RUNNER_TEMP}/auth-service"
+            touch "${RUNNER_TEMP}/auth-service/requirements.txt"
+            echo "::warning::AUTH_SERVICE_TOKEN is not set, the e2e tier is skipped"
+          fi
+
+      - name: Build
+        env:
+          SANITIZER: ${{ matrix.sanitizer }}
+          CERVER_DIR: ${{ runner.temp }}/cerver
+          AUTH_DIR: ${{ runner.temp }}/libauth
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/build.sh
+
+      - name: Unit and integration
+        if: ${{ matrix.sanitizer == '' }}
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh
+
+      - name: Unit and integration with sanitizers
+        if: ${{ matrix.sanitizer != '' }}
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh asan
+
+      - name: Databases
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' }}
+        run: ./tests/run.sh mongo && ./tests/run.sh redis
+
+      - name: End to end
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' && matrix.sanitizer == '' }}
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh e2e
+
+      - name: End to end with sanitizers
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' && matrix.sanitizer != '' }}
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh asan e2e/
