@@ -1,0 +1,91 @@
+name: Percepthor Nightly
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+env:
+  CERVER_REPOSITORY: ermiry/cerver
+  CERVER_REF: 2.0b-64
+  PYCERVER_REPOSITORY: ermiry-com/py-cerver
+  PYCERVER_REF: '1.0'
+  LIBAUTH_REPOSITORY: percepthor/libauth
+  LIBAUTH_REF: '0.5'
+  AUTH_SERVICE_REPOSITORY: percepthor/auth-service
+  AUTH_SERVICE_REF: work
+
+jobs:
+  nightly:
+    name: Percepthor fuzzing and flaky hunter
+    runs-on: ubuntu-latest
+    env:
+      AUTH_SERVICE_TOKEN: ${{ secrets.AUTH_SERVICE_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout Cerver
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CERVER_REPOSITORY }}
+          ref: ${{ env.CERVER_REF }}
+          path: cerver
+
+      - name: Checkout PyCerver
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PYCERVER_REPOSITORY }}
+          ref: ${{ env.PYCERVER_REF }}
+          path: py-cerver
+
+      - name: Checkout LibAuth
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.LIBAUTH_REPOSITORY }}
+          ref: ${{ env.LIBAUTH_REF }}
+          path: libauth
+
+      - name: Checkout auth-service
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.AUTH_SERVICE_REPOSITORY }}
+          ref: ${{ env.AUTH_SERVICE_REF }}
+          token: ${{ env.AUTH_SERVICE_TOKEN }}
+          path: auth-service
+
+      - name: Move the sources out of the workspace
+        run: |
+          mv cerver py-cerver libauth "${RUNNER_TEMP}/"
+          if [ -d auth-service ]; then
+            mv auth-service "${RUNNER_TEMP}/"
+          else
+            mkdir -p "${RUNNER_TEMP}/auth-service"
+            touch "${RUNNER_TEMP}/auth-service/requirements.txt"
+            echo "::warning::AUTH_SERVICE_TOKEN is not set, the e2e tier is skipped"
+          fi
+
+      - name: Build
+        env:
+          CERVER_DIR: ${{ runner.temp }}/cerver
+          AUTH_DIR: ${{ runner.temp }}/libauth
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/build.sh
+
+      - name: Fuzzing
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh fuzz
+
+      - name: Databases
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' }}
+        run: ./tests/run.sh mongo && ./tests/run.sh redis
+
+      - name: Flaky hunter
+        if: ${{ env.AUTH_SERVICE_TOKEN != '' }}
+        env:
+          PYCERVER_DIR: ${{ runner.temp }}/py-cerver
+          AUTH_SERVICE_DIR: ${{ runner.temp }}/auth-service
+        run: ./tests/run.sh repeat e2e/ 20
