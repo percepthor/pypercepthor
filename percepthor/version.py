@@ -15,10 +15,10 @@ __all__ = [
 	"pypercepthor_version_print_version_name"
 ]
 
-PERCEPTHOR_VERSION = "0.6.2"
-PERCEPTHOR_VERSION_NAME = "Version 0.6.2"
-PERCEPTHOR_VERSION_DATE = "21/11/2022"
-PERCEPTHOR_VERSION_TIME = "10:01 CST"
+PERCEPTHOR_VERSION = "0.7"
+PERCEPTHOR_VERSION_NAME = "Version 0.7"
+PERCEPTHOR_VERSION_DATE = "26/12/2025"
+PERCEPTHOR_VERSION_TIME = "17:27 CST"
 PERCEPTHOR_VERSION_AUTHOR = "Erick Salas"
 
 # the versions of libauth and of pycerver whose APIs this release binds
